@@ -1,0 +1,103 @@
+#usda 1.0
+(
+    customLayerData = {
+        string "aeco:clash:layer" = "Route S wireframe view over exact mesh twins"
+    }
+)
+
+over "demo_datacentre_01"
+{
+    over "demo_datacentre_01_Site"
+    {
+        over "demo_datacentre_01"
+        {
+            over "L01_Office"
+            {
+                over "Office_Corridor_L01"
+                {
+                    over "Corridor_ceiling_void"
+                    {
+                        over "tray_void_ocorr_1"
+                        {
+                            over "Geom"
+                            {
+                                token visibility = "invisible"
+                            }
+
+                            over "Body"
+                            {
+                                token visibility = "inherited"
+                            }
+                        }
+
+                        over "pipe_clash_hard"
+                        {
+                            over "Geom"
+                            {
+                                token visibility = "invisible"
+                            }
+
+                            over "Body"
+                            {
+                                token visibility = "inherited"
+                            }
+                        }
+
+                        over "pipe_clash_near"
+                        {
+                            over "Geom"
+                            {
+                                token visibility = "invisible"
+                            }
+
+                            over "Body"
+                            {
+                                token visibility = "inherited"
+                            }
+                        }
+
+                        over "pipe_clash_tangent"
+                        {
+                            over "Geom"
+                            {
+                                token visibility = "invisible"
+                            }
+
+                            over "Body"
+                            {
+                                token visibility = "inherited"
+                            }
+                        }
+                    }
+                }
+
+                over "wall_l1_h_007"
+                {
+                    over "Geom"
+                    {
+                        token visibility = "invisible"
+                    }
+
+                    over "Body"
+                    {
+                        token visibility = "inherited"
+                    }
+                }
+            }
+        }
+    }
+}
+
+def "Renders"
+{
+    def Camera "wireframe"
+    {
+        float2 clippingRange = (0.001, 100)
+        float horizontalAperture = 28
+        token projection = "orthographic"
+        float verticalAperture = 17.5
+        matrix4d xformOp:transform = ( (0.837610596838614, 0.5462677805469224, -2.7755575615628907e-17, 0), (-0.17692311279332035, 0.2712821062830912, 0.946099482596905, -0), (0.5168236645348029, -0.7924629522866977, 0.32387616310847633, 0), (25.499999999999993, -3.8000000000000016, 7.800000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+}
+

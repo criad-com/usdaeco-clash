@@ -1,0 +1,79 @@
+#usda 1.0
+(
+    subLayers = [@usd/schema.usda@, @usdGeom/schema.usda@, @usdAeco/schema.usda@]
+)
+
+over "GLOBAL" (
+    customData = {
+        string libraryName = "usdAecoClash"
+        string libraryPath = "./"
+        bool skipCodeGeneration = true
+        bool useLiteralIdentifier = true
+    }
+) {}
+
+class AecoClashTest "AecoClashTest" (
+    inherits = </AecoGroupBase>
+    prepend apiSchemas = ["CollectionAPI:setA", "CollectionAPI:setB"]
+    doc = "A coordination test record owning two selections and derived results. This record is a new referent, not a product kind."
+    customData = {
+        string className = "Test"
+        token[] fallbackTypes = ["Scope"]
+    }
+) {
+    uniform token aeco:clash:method = "mesh" (
+        allowedTokens = ["mesh", "exact"]
+        doc = "Measurement route. The exact route requires a separate engine."
+    )
+    double aeco:clash:tolerance = 0.001 (
+        doc = "Metres. Absolute mesh distances within this band are touching."
+    )
+    double aeco:clash:clearance = 0 (
+        doc = "Metres. Also report positive gaps up to this distance."
+    )
+    uniform token collection:setA:expansionRule = "explicitOnly"
+    uniform token collection:setB:expansionRule = "explicitOnly"
+}
+
+class AecoClashResult "AecoClashResult" (
+    inherits = </Typed>
+    doc = "A derived finding record, child of its test, referencing two existing elements."
+    customData = {
+        string className = "Result"
+        token[] fallbackTypes = ["Scope"]
+    }
+) {
+    rel aeco:clash:elements (
+        aecoDerived = true
+        doc = "Exactly two distinct existing element referents."
+    )
+    uniform token aeco:clash:kind = "hard" (
+        aecoDerived = true
+        allowedTokens = ["hard", "clearance", "touching"]
+        doc = "Geometric finding category, not product classification."
+    )
+    double aeco:clash:distance = 0 (
+        aecoDerived = true
+        doc = "Metres. Positive separation; negative mesh sampled penetration or negative zero for exact overlap (common volume decides)."
+    )
+    double aeco:clash:volume = 0 (
+        aecoDerived = true
+        doc = "Cubic metres. Exact common volume only; mesh results leave this unauthored."
+    )
+    point3d aeco:clash:point = (0, 0, 0) (
+        aecoDerived = true
+        doc = "World-space location in metres: mesh witness or exact camera-framing midpoint, as declared in evidence."
+    )
+    double aeco:clash:uncertainty = 0 (
+        aecoDerived = true
+        doc = "Metres. Sum of the bodies' mesh deflection bounds or exact kernel tolerances."
+    )
+    uniform token aeco:clash:status = "new" (
+        allowedTokens = ["new", "active", "reviewed", "approved", "resolved"]
+        doc = "Review driver. Author status changes in a review overlay."
+    )
+    string aeco:clash:evidence = "" (
+        aecoDerived = true
+        doc = "JSON provenance: body paths, roles, approximation, stamps, uncertainty method and mesh measurement limitations."
+    )
+}

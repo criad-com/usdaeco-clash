@@ -1,0 +1,178 @@
+{
+  "actual_findings_sha256": "a25ca95f994fa576699f42aa0fd7a5575c7405bf7c907847b8cc72e9b4f8d55a",
+  "datacentre": {
+    "ref": "v0.4.5",
+    "variant": "clash"
+  },
+  "facility": "demo-datacentre-01",
+  "findings_sha256": "739dee2c74acf6a26a9d8db316fb9ba22493ef4af19d49594c41d5bfd02b52db",
+  "pins": {
+    "axis": {
+      "library": "usdAecoAxis",
+      "ref": "v0.1.2",
+      "repo": "usdaeco-axis"
+    },
+    "core": {
+      "library": "usdAeco",
+      "ref": "v0.9.2",
+      "repo": "usdaeco-core"
+    },
+    "datacentre": {
+      "library": null,
+      "ref": "v0.4.5",
+      "repo": "usdaeco-datacentre"
+    },
+    "ifc": {
+      "library": null,
+      "ref": "v0.2.0",
+      "repo": "usdaeco-ifc"
+    },
+    "solid": {
+      "library": null,
+      "ref": "v0.1.2",
+      "repo": "usdaeco-solid"
+    },
+    "toolchain": {
+      "library": null,
+      "ref": "v0.3.8",
+      "repo": "usdaeco-toolchain"
+    },
+    "usdSolid": {
+      "library": "usdSolid",
+      "ref": "v0.1.0",
+      "repo": "usdSolid"
+    },
+    "usdSolidOcct": {
+      "library": null,
+      "ref": "v0.1.0",
+      "repo": "usdSolidOcct"
+    }
+  },
+  "renders": [
+    {
+      "bytes": 61540,
+      "height": 800,
+      "path": "renders/coarse.png",
+      "sha256": "22310cb3504c43ea086659185187568cf2ab36b5bd085486c253a4cb4c048b77",
+      "width": 1280
+    },
+    {
+      "bytes": 68763,
+      "height": 800,
+      "path": "renders/fine.png",
+      "sha256": "fcfab2b1bc5e81c69b61cdb6a76cde19baa101ea4bf16591164b6f8ccebb218b",
+      "width": 1280
+    },
+    {
+      "bytes": 64426,
+      "height": 800,
+      "path": "renders/overview.png",
+      "sha256": "743fb0ec58d3a4ef0d7a46c44f1cf540244a57d547be0977ba615bc131d6e266",
+      "width": 1280
+    },
+    {
+      "bytes": 131810,
+      "height": 800,
+      "path": "renders/wireframe.png",
+      "sha256": "6b782df9425fa54bc529cc96e6805e3801dd4d98ab66a2a036e1f25aa965e627",
+      "width": 1280
+    }
+  ],
+  "result": {
+    "bytes": 2871783,
+    "files": [
+      {
+        "bytes": 800,
+        "path": "result/README.md",
+        "sha256": "f7a00f8ae63165f6b66143cffaa9f5b6fa0d0167b959fe60a9bb6912e0d75db5"
+      },
+      {
+        "bytes": 1792669,
+        "normalized_sha256": "d77dfab4ed9a623c75b2f4787cfd193c27d5b531e70f5eb0c0194ca3d05755f6",
+        "path": "result/example.usdc",
+        "sha256": "fbeb4265ca6f74b8037bc3a385698c2dd92c54bd18dcf3dae9eff019566fd0eb"
+      },
+      {
+        "bytes": 1127,
+        "path": "result/layers/inputs/cameras.usda",
+        "sha256": "05ff3d786689973082ceae800a8198a4ce8ab01d87b46021e989911c17404325"
+      },
+      {
+        "bytes": 1417,
+        "path": "result/layers/inputs/tests.usda",
+        "sha256": "27e41a8c307d1767c8b1a65ec06f77dffd2b80646047ea48856ab25f93d9b233"
+      },
+      {
+        "bytes": 23163,
+        "path": "result/layers/out/deflection-study.usda",
+        "sha256": "0de2796aa8bb0fe8b6cd48b561a20a3f22067c4fb2d576a6971979d380a68688"
+      },
+      {
+        "bytes": 7139,
+        "path": "result/layers/out/exact-results.usda",
+        "sha256": "4298bb524a5bdc587a9e687ee6cf810ca6194de93d2fc9fcf051fc0ec4856938"
+      },
+      {
+        "bytes": 53091,
+        "path": "result/layers/out/exact.usda",
+        "sha256": "9efa9c8cccb2ef8460fbec140b3dfc8e3e6d8245984d4acd81d7b398202c0334"
+      },
+      {
+        "bytes": 792087,
+        "path": "result/layers/out/presentation.usda",
+        "sha256": "cec21b19fdf1851d99044624d40c5d340d6a606785ce92d5a53fe39b8b797a6c"
+      },
+      {
+        "bytes": 6735,
+        "path": "result/layers/out/results.usda",
+        "sha256": "303a487e0a5f3f502c1ae9134433050f48bdd4a5b26de3aa7653af3f558ccf82"
+      },
+      {
+        "bytes": 125904,
+        "path": "result/layers/out/twins.usda",
+        "sha256": "73f22f59c586bb8b6679cf6b136e2b732d9841cfb2fc533275fe27307fb351b8"
+      },
+      {
+        "bytes": 3128,
+        "path": "result/layers/out/wireframe-view.usda",
+        "sha256": "447511359f44c0000f2863c4eb6f37654860d0eff7fafa96c1df23cfcbbfb4ff"
+      },
+      {
+        "bytes": 64523,
+        "path": "result/vanilla.png",
+        "sha256": "0c08cb1f87e8ce3804b15fd58d2e64bb6254b1c2b0cc1b1aa9a9199f97974b7c"
+      }
+    ],
+    "normalization": "sdf-usda-v1",
+    "prim_count": 12411,
+    "vanilla": {
+      "bytes": 64523,
+      "height": 800,
+      "path": "result/vanilla.png",
+      "sha256": "0c08cb1f87e8ce3804b15fd58d2e64bb6254b1c2b0cc1b1aa9a9199f97974b7c",
+      "width": 1280
+    }
+  },
+  "source": {
+    "layers": [
+      {
+        "bytes": 359760,
+        "path": "dc.geometry.usdc",
+        "sha256": "24c22644aa0b9470ceddfb8433a828284fea2df964d77840bea53b1328d8675e"
+      },
+      {
+        "bytes": 1485167,
+        "path": "dc.semantics.usdc",
+        "sha256": "5a9af9ff8ec3366d80408e73a0768f4698db71b329f9edb21e4d6fbc7ad91f15"
+      },
+      {
+        "bytes": 517,
+        "path": "dc.usda",
+        "sha256": "628b1383ecb57956fd3c39967c68914afa97c3a3d24c7359c05c44b9cdb7abf9"
+      }
+    ],
+    "manifest_sha256": "a760940a286c42471a6b6db86c8b696a7077242c45275dce5b29898d6d87776d",
+    "mode": "pinned",
+    "sha256": "628b1383ecb57956fd3c39967c68914afa97c3a3d24c7359c05c44b9cdb7abf9"
+  }
+}

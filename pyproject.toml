@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "usdaeco-clash"
+version = "0.2.2"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "usdaeco-toolchain>=0.3.3,<0.4"]
+
+[project.scripts]
+aeco-clash = "usdaeco_clash.cli:main"
+
+[tool.setuptools]
+packages = ["usdaeco_clash", "usdAecoClashValidators"]
+package-dir = {usdaeco_clash = "tools/usdaeco_clash", usdAecoClashValidators = "usdAecoClashValidators"}
+
+[tool.setuptools.package-data]
+usdAecoClashValidators = ["plugInfo.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["testenv"]
+python_files = ["test*.py"]

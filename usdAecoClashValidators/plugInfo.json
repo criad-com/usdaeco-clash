@@ -1,0 +1,37 @@
+{
+  "Plugins": [
+    {
+      "Type": "python",
+      "Name": "usdAecoClashValidators",
+      "Root": ".",
+      "Info": {
+        "Validators": {
+          "keywords": [
+            "UsdAecoClashValidators"
+          ],
+          "ClashResultWithoutElementsChecker": {
+            "doc": "Check two distinct existing element targets.",
+            "schemaTypes": [
+              "UsdAecoClashResult"
+            ]
+          },
+          "ClashUncertaintyExceedsToleranceChecker": {
+            "doc": "Warn when body uncertainty exceeds test tolerance.",
+            "schemaTypes": [
+              "UsdAecoClashResult"
+            ]
+          },
+          "ClashStatusUnreviewedChecker": {
+            "doc": "Warn when a result awaits review.",
+            "schemaTypes": [
+              "UsdAecoClashResult"
+            ]
+          },
+          "ClashRouteDisagreementChecker": {
+            "doc": "Warn when route verdicts differ beyond both uncertainty bands."
+          }
+        }
+      }
+    }
+  ]
+}

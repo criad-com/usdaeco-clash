@@ -1,0 +1,14 @@
+#usda 1.0
+(
+    subLayers = [@../schema.usda@]
+)
+over "AecoClashTest" (
+    customData = {
+        string userDocBrief = "A coordination test with two native USD collections and mesh/exact route selection."
+    }
+) {}
+over "AecoClashResult" (
+    customData = {
+        string userDocBrief = "A pair finding, distance witness and uncertainty provenance beneath its test."
+    }
+) {}

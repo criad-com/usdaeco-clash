@@ -1,0 +1,221 @@
+[
+  {
+    "counts": {
+      "elements": 2980,
+      "levels": 2,
+      "meshes": 3015,
+      "ports": 6244,
+      "spaces": 35,
+      "unclassified": 2,
+      "unparented": 0
+    },
+    "name": "PinnedSourceCounts"
+  },
+  {
+    "exact": 5,
+    "failed": 0,
+    "name": "ExactExport",
+    "selected": 5
+  },
+  {
+    "case": "through-wall",
+    "decided_by": "both",
+    "exact": {
+      "distance": -0.0,
+      "kind": "hard",
+      "uncertainty": 2.0000000000314e-05,
+      "verdict": "hard",
+      "volume": 0.00042836676119217495
+    },
+    "mesh": {
+      "distance": -0.07500000298023224,
+      "kind": "hard",
+      "uncertainty": 0.00022009999999999998,
+      "verdict": "hard",
+      "volume": null
+    },
+    "name": "RouteComparison"
+  },
+  {
+    "case": "over-tray",
+    "decided_by": "exact",
+    "exact": {
+      "distance": 0.005000000000000782,
+      "kind": "clearance",
+      "uncertainty": 2e-05,
+      "verdict": "clearance",
+      "volume": 0.0
+    },
+    "mesh": {
+      "distance": 0.005000114440917969,
+      "kind": "clearance",
+      "uncertainty": 0.0057582,
+      "verdict": "undecidable",
+      "volume": null
+    },
+    "name": "RouteComparison"
+  },
+  {
+    "case": "tangent",
+    "decided_by": "exact",
+    "exact": {
+      "distance": 0.0,
+      "kind": "touching",
+      "uncertainty": 2.0000000000314e-05,
+      "verdict": "touching",
+      "volume": 0.0
+    },
+    "mesh": {
+      "distance": -0.0010635405778884888,
+      "kind": "hard",
+      "uncertainty": 0.0010636,
+      "verdict": "undecidable",
+      "volume": null
+    },
+    "name": "RouteComparison"
+  },
+  {
+    "axis": [
+      [
+        24,
+        -4,
+        6.8
+      ],
+      [
+        24,
+        -2,
+        6.8
+      ]
+    ],
+    "case": "through-wall",
+    "mesh_verdict": "hard",
+    "name": "ManifestWitness",
+    "radius": 0.03015,
+    "sides": 26,
+    "witness_matches": true
+  },
+  {
+    "axis": [
+      [
+        23,
+        -1.5,
+        6.88515
+      ],
+      [
+        25,
+        -1.5,
+        6.88515
+      ]
+    ],
+    "case": "over-tray",
+    "mesh_verdict": "undecidable",
+    "name": "ManifestWitness",
+    "radius": 0.03015,
+    "sides": 5,
+    "witness_matches": true
+  },
+  {
+    "axis": [
+      [
+        23,
+        -2.89485,
+        6.8
+      ],
+      [
+        25,
+        -2.89485,
+        6.8
+      ]
+    ],
+    "case": "tangent",
+    "mesh_verdict": "falsePenetration",
+    "name": "ManifestWitness",
+    "radius": 0.03015,
+    "sides": 12,
+    "witness_matches": true
+  },
+  {
+    "distance": 0.005030530551853651,
+    "name": "ExactDeflectionStudy",
+    "requested": 0.0001,
+    "study": "fine",
+    "triangles": [
+      228,
+      12
+    ]
+  },
+  {
+    "distance": 0.005030653661993512,
+    "name": "ExactDeflectionStudy",
+    "requested": 0.006,
+    "study": "coarse",
+    "triangles": [
+      124,
+      12
+    ]
+  },
+  {
+    "message": "Body uncertainty exceeds the test tolerance or the uncertainty band is invalid; review the evidence.",
+    "name": "ClashUncertaintyExceedsTolerance",
+    "paths": [
+      "/Clash/Pinned/Result_b87e3bc1e7f95c218e8540962036139e"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Clash result has not been reviewed.",
+    "name": "ClashStatusUnreviewed",
+    "paths": [
+      "/Clash/Pinned/ExactResult_e871d6a8fd345356bd8b5d7dc4bbe3d5"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Clash result has not been reviewed.",
+    "name": "ClashStatusUnreviewed",
+    "paths": [
+      "/Clash/Pinned/ExactResult_dd098bb17c5a54249e4da88ead318732"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Body uncertainty exceeds the test tolerance or the uncertainty band is invalid; review the evidence.",
+    "name": "ClashUncertaintyExceedsTolerance",
+    "paths": [
+      "/Clash/Pinned/Result_dd098bb17c5a54249e4da88ead318732"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Clash result has not been reviewed.",
+    "name": "ClashStatusUnreviewed",
+    "paths": [
+      "/Clash/Pinned/Result_dd098bb17c5a54249e4da88ead318732"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Clash result has not been reviewed.",
+    "name": "ClashStatusUnreviewed",
+    "paths": [
+      "/Clash/Pinned/ExactResult_b87e3bc1e7f95c218e8540962036139e"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Clash result has not been reviewed.",
+    "name": "ClashStatusUnreviewed",
+    "paths": [
+      "/Clash/Pinned/Result_b87e3bc1e7f95c218e8540962036139e"
+    ],
+    "severity": "warn"
+  },
+  {
+    "message": "Clash result has not been reviewed.",
+    "name": "ClashStatusUnreviewed",
+    "paths": [
+      "/Clash/Pinned/Result_e871d6a8fd345356bd8b5d7dc4bbe3d5"
+    ],
+    "severity": "warn"
+  }
+]

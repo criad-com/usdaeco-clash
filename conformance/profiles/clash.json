@@ -1,0 +1,11 @@
+{
+  "keywords": [
+    "UsdAecoClashValidators"
+  ],
+  "severity_overrides": {
+    "ClashResultWithoutElements": "error",
+    "ClashUncertaintyExceedsTolerance": "warn",
+    "ClashStatusUnreviewed": "warn",
+    "ClashRouteDisagreement": "warn"
+  }
+}

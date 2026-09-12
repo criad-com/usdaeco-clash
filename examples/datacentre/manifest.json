@@ -1,7 +1,7 @@
 {
-  "actual_findings_sha256": "a25ca95f994fa576699f42aa0fd7a5575c7405bf7c907847b8cc72e9b4f8d55a",
+  "actual_findings_sha256": "2eca5736fe7343aa4ef0dca601718c244ac6c1e208372eae22ebcc6dd584de52",
   "datacentre": {
-    "ref": "v0.4.5",
+    "ref": "v0.4.8",
     "variant": "clash"
   },
   "facility": "demo-datacentre-01",
@@ -9,43 +9,51 @@
   "pins": {
     "axis": {
       "library": "usdAecoAxis",
-      "ref": "v0.1.2",
-      "repo": "usdaeco-axis"
+      "ref": "v0.1.5",
+      "repo": "usdaeco-axis",
+      "revision": "ecff1d98bcc45c22fcceefd453374671900793ae"
     },
     "core": {
       "library": "usdAeco",
-      "ref": "v0.9.2",
-      "repo": "usdaeco-core"
+      "ref": "v0.9.5",
+      "repo": "usdaeco-core",
+      "revision": "683adc3280254bc71b396a9c64a359cc708788f4"
     },
     "datacentre": {
       "library": null,
-      "ref": "v0.4.5",
-      "repo": "usdaeco-datacentre"
+      "ref": "v0.4.8",
+      "repo": "usdaeco-datacentre",
+      "revision": "9e22b14c4909e50806805e735f93b1b425ac48cb"
     },
     "ifc": {
       "library": null,
-      "ref": "v0.2.0",
-      "repo": "usdaeco-ifc"
+      "ref": "v0.2.2",
+      "repo": "usdaeco-ifc",
+      "revision": "8eb72e89af15e8642d914948384fe73038cc7817"
     },
     "solid": {
       "library": null,
-      "ref": "v0.1.2",
-      "repo": "usdaeco-solid"
+      "ref": "v0.1.5",
+      "repo": "usdaeco-solid",
+      "revision": "241b7b0c72b5c2703146e2c527744cf2951496e5"
     },
     "toolchain": {
       "library": null,
-      "ref": "v0.3.8",
-      "repo": "usdaeco-toolchain"
+      "ref": "v0.3.10",
+      "repo": "usdaeco-toolchain",
+      "revision": "59d3da5ff5114089b54efaaae38efdd7fe1b8e73"
     },
     "usdSolid": {
       "library": "usdSolid",
-      "ref": "v0.1.0",
-      "repo": "usdSolid"
+      "ref": "v0.1.5",
+      "repo": "usdSolid",
+      "revision": "5792a6f56de3a7f881a73ba11b3635871cd2dc4e"
     },
     "usdSolidOcct": {
       "library": null,
-      "ref": "v0.1.0",
-      "repo": "usdSolidOcct"
+      "ref": "v0.1.4",
+      "repo": "usdSolidOcct",
+      "revision": "0936e4e355b9ff5971ee5dbb4e8a47dcdea9e3fe"
     }
   },
   "renders": [
@@ -84,7 +92,7 @@
       {
         "bytes": 800,
         "path": "result/README.md",
-        "sha256": "f7a00f8ae63165f6b66143cffaa9f5b6fa0d0167b959fe60a9bb6912e0d75db5"
+        "sha256": "b33c5f5d7fb01e02287e70eb44ab2851e5a8fd6a03281affead059be20025845"
       },
       {
         "bytes": 1792669,

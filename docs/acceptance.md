@@ -1,33 +1,68 @@
-# Acceptance evidence for v0.2.2
+# Acceptance evidence for v0.2.3
 
-Public names now use `github.com/criad-com`. The checks used toolchain v0.3.8
-and the exact dependency releases recorded in `dependencies.json`: core v0.9.2,
-axis v0.1.2, datacentre v0.4.5, solid v0.1.2, IFC integration v0.2.0 and
-usdSolid/usdSolidOcct v0.1.0. Tests import source without setuptools.
+All eight direct family inputs use the public release tags in
+[dependencies.json](../dependencies.json), with their checked forge revisions.
+Core remains supported by `>=0.9.2,<1.0`; the Python toolchain range remains
+`>=0.3.3,<0.4`. Neither range needed widening. The source package, distribution,
+library and generated resource plugin all report 0.2.3.
 
 | Acceptance | Measured result | Status |
 |---|---|---|
 | Family gate | 48 checks, 0 failed, 0 not run | PASS |
-| Structure under toolchain v0.3.8 | 29 rules, 0 failed, including S05 and S25 | PASS |
-| Pytest | 37 passed | PASS |
-| Public references | 10 references rewritten; 0 legacy public references remain | PASS |
-| Release metadata | Library, Python package and resource plugin agree on 0.2.2 | PASS |
-| Dependency refs | Only toolchain changed, from v0.3.5 to v0.3.8 | PASS |
+| Structure under toolchain v0.3.10 | S01–S29: 29 rules, 0 failed | PASS |
+| Pytest | 37 passed, including native geometry regressions | PASS |
+| Direct source pins | 8 tags and 8 checked forge revisions agree | PASS |
+| Release metadata | 4 version declarations agree on 0.2.3 | PASS |
+| Public flake references | 8 release-tag URLs; 0 legacy public references or family hash refs | PASS |
 | Validation plugins | 8 core + 4 clash rules loaded; published stage 0 errors, 10 warnings | PASS |
-| Fresh pinned example | Findings and comparison match; 12,411 plugin-free prims; 4 non-blank views | PASS |
-| Published artifacts | Committed USD, renders and user documentation assets unchanged | PASS |
-| Nix | One attempt stopped during nested input resolution with HTTP 404 | NOT PROVEN |
+| Fresh pinned example | Findings and comparison match; 12,411 plugin-free prims; 4 nonblank views | PASS |
+| Published USD | Flattened crate + 9 own layers: all 2,806,460 bytes unchanged | PASS |
+| Source evidence | All 3 source layer hashes and the source manifest hash unchanged | PASS |
+| Images | 5 fresh 1280×800 renders; all 6 committed PNGs retain their bytes | PASS |
+| Exact comparison | 3 mesh + 3 exact pairs; 5 mm clearance decided only by exact; 0 unclassified | PASS |
+| Publication sweep | 69 files, 0 findings, including binary USD and image metadata | PASS |
+| Nix syntax | Flake parses successfully | PASS |
+| Nix flake check | 1 offline attempt, exit 1 during local override resolution | NOT PROVEN |
+
+Run the commands in the [README](../README.md), including
+`examples/datacentre/run.py --publish`. Publication regenerated the source IFC,
+exact bodies, both result layers, tessellation studies, wireframe, flattened
+crate and five renders. The full gate then reproduced the example in 40.193 s
+against its 180 s budget. No expected findings or comparison table changed.
+The [machine-readable evidence](public-repin.json) records artifact hashes,
+render differences and the observed native runtime.
+
+The final result diff changes only the source-pin notice and manifest receipts.
+Geometry, derived layers, cameras, schema definitions and committed images
+retain their bytes. Producer stamps identify the unchanged derivation
+implementations and remain unchanged. Upstream [datacentre 0.4.8](https://github.com/criad-com/usdaeco-datacentre/blob/v0.4.8/CHANGELOG.md)
+retains published stage and camera bytes, while [bridge 0.1.4](https://github.com/criad-com/usdSolidOcct/blob/v0.1.4/CHANGELOG.md)
+records unchanged exported geometry after its native rebuild.
 
 ## Deviations
 
-- The single `nix flake check --offline --no-write-lock-file` attempt used
-  local copies of the declared direct pins, then failed to resolve
-  `toolchain/aeco-toolchain` at revision
-  `e190680d3f94eb76e06abe77574fda1308af2c85` from its public source (HTTP 404).
-  Derivation checks did not run; no second attempt was made.
-- The example manifest's toolchain receipt was updated to satisfy S22's exact
-  pin agreement. No result was republished, and no source or artifact hashes
-  changed.
+- **Native package substitution.** The observed bridge is v0.1.4, with schema
+  and validators v0.1.4, verified against that release's runtime receipt.
+  The selected usdSolid source is v0.1.5. Its [changelog](https://github.com/criad-com/usdSolid/blob/v0.1.5/CHANGELOG.md)
+  records builder/pin changes and a pending native rebuild, with unchanged
+  upstream geometry sources. The flake wires v0.1.5 into the bridge build;
+  native execution of that exact package combination remains not proven.
+- **Nix setup failure.** The single `nix flake check --offline --no-write-lock-file`
+  attempt used local overrides for all eight direct pins, the tagged build
+  toolchain and the toolchain's historical core fixture. Remote builders and
+  substituters were disabled. The local build-toolchain clone was shallow,
+  but its Git URL omitted Nix's required shallow option. Nix rejected the
+  override before output evaluation or derivation checks. This was an override
+  setup error, not evidence about public resolution. No retry was made;
+  public online resolution and the complete build remain not proven.
+- **Render sampling.** Five fresh PNGs passed the nonblank and size checks.
+  Their largest mean absolute channel difference from the committed images was
+  0.097370 on the 0–255 scale. The committed PNGs were retained, and their
+  receipts were regenerated after publication; S28 checks freshness by rendering,
+  without requiring PNG byte equality across runs.
+- **Finding order.** The raw generated-findings hash changed because validator
+  findings arrived in a different order. The complete findings multiset matches
+  the expected JSON exactly; the comparison Markdown is byte-identical.
 
 ## Historical v0.2.0 evidence
 

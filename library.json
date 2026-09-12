@@ -1,6 +1,6 @@
 {
   "name": "usdAecoClash",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "kind": "usecase",
   "tier": "kind",
   "requires": {

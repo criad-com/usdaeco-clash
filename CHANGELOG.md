@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.3
+
+- public re-pin: toolchain v0.3.10, core v0.9.5, axis v0.1.5,
+  datacentre v0.4.8, solid v0.1.5, IFC v0.2.2, usdSolid v0.1.5,
+  usdSolidOcct v0.1.4. Record the checked forge revisions alongside tags;
+  keep compatible requirement ranges unchanged.
+- Import the bridge's package outputs from its source pin with the selected
+  schema and shared toolchain inputs; ignore the generated example source alias.
+- Align the source package version with the library and distribution version.
+- Republish the pinned example: crate and nine own layers retain 2,806,460
+  bytes; source hashes and findings match. Retain all six committed PNGs
+  after five fresh renders; update the source-pin notice and manifest receipts.
+- Verify 48 checks, 0 failed, 0 not run; 29 structure rules and 37 tests pass.
+- Deviations: native checks use bridge v0.1.4 with schema/validators v0.1.4;
+  the selected usdSolid v0.1.5 native build remains unproven. The single offline
+  Nix check rejected a shallow local override before evaluation; no retry.
+  See [acceptance evidence](docs/acceptance.md).
+
 ## 0.2.2
 
 - public names → github.com/criad-com.

@@ -1,6 +1,6 @@
 # Three pairs measured by mesh and exact
 
-The source is demo-datacentre-01, clash v0.4.5. Follow the environment setup in
+The source is demo-datacentre-01, clash v0.4.8. Follow the environment setup in
 the [root README](../../README.md), then run:
 
 ```sh

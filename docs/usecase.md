@@ -99,7 +99,7 @@ the shared harness otherwise owns composition, findings comparison and rendering
 
 ## 6 The example on the demo data centre
 
-The pinned source is demo-datacentre-01, clash v0.4.5. Counts come from
+The pinned source is demo-datacentre-01, clash v0.4.8. Counts come from
 `dc.manifest.json`: 2,980 elements, 3,015 meshes, 6,244 ports, 35 spaces and two
 levels. The hook also checks the actual element and mesh census. It asserts
 all three cases' axes, radii, tessellation side counts, distances, uncertainty
@@ -175,6 +175,6 @@ outside this release. No whole-facility performance claim is made.
 
 ## 9 Status
 
-Version 0.2.2 delivers both engines, four validators, the measured comparison,
+Version 0.2.3 delivers both engines, four validators, the measured comparison,
 two exact tessellation studies, Route S wireframe and portable results.
 The [acceptance report](acceptance.md) records the gate and remaining limits.

@@ -20,7 +20,7 @@ in the walkthrough. No product-kind vocabulary or new applied API is added.
 ## The example
 
 Open [result/example.usdc](examples/datacentre/result/example.usdc) in a USD
-viewer. It is flattened and self-contained. The pinned `clash` v0.4.5 example
+viewer. It is flattened and self-contained. The pinned `clash` v0.4.8 example
 has three mesh and three exact results, including exact touching. The **5.000 mm
 gap is decided only by exact**: its mesh uncertainty is 5.7582 mm. The tangent's
 1.06354 mm mesh penetration is also inside its band; exact reports touching.
@@ -34,7 +34,7 @@ Both routes find the through-wall clash, with exact common volume
 Use the family Python with OpenUSD, UsdValidation, NumPy, IfcOpenShell 0.8.5,
 PyYAML, pytest, Jinja2 and Pillow. Tests import source directly; no editable
 installation or setuptools is needed. Set `PYTHON` to that interpreter and
-configure these sibling checkouts:
+configure sibling checkouts at the tags in the Family table:
 
 ```sh
 export PYTHON=python3
@@ -75,20 +75,21 @@ replace the previous layer on recheck so disappeared pairs do not persist.
 
 Flake URLs use public repository names. Supply deployment mirrors through an
 external registry or `--override-input`, following the
-[toolchain instructions](https://github.com/criad-com/usdaeco-toolchain/blob/v0.3.8/docs/repo-conventions.md),
+[toolchain instructions](https://github.com/criad-com/usdaeco-toolchain/blob/v0.3.10/docs/repo-conventions.md),
 then run `nix flake check`. Never commit deployment-specific lockfiles.
 
 ## Family
 
 | Dependency | Tested pin | Role |
 |---|---|---|
-| core | v0.9.2; supports `>=0.9.2,<1.0` | identity, collections, representation mark |
-| axis | v0.1.2 | family compatibility pin |
-| toolchain | v0.3.8 | generation, structure, examples and rendering |
-| datacentre | v0.4.5 | published clash fixture and source generator |
-| solid | v0.1.2 | exact-body conventions and wireframe display |
-| IFC integration | v0.2.0 | optional exact export and native runtime launcher |
-| usdSolid / usdSolidOcct | v0.1.0 | optional BrepArray schema and OCCT bridge |
+| core | v0.9.5; supports `>=0.9.2,<1.0` | identity, collections, representation mark |
+| axis | v0.1.5 | family compatibility pin |
+| toolchain | v0.3.10 | generation, structure, examples and rendering |
+| datacentre | v0.4.8 | published clash fixture and source generator |
+| solid | v0.1.5 | exact-body conventions and wireframe display |
+| IFC integration | v0.2.2 | optional exact export and native runtime launcher |
+| usdSolid | v0.1.5 | optional BrepArray schema |
+| usdSolidOcct | v0.1.4 | optional OCCT bridge source |
 
 The schema requires only core. Exact runtime dependencies are optional companion
 inputs, recorded in [dependencies.json](dependencies.json).
@@ -103,9 +104,12 @@ inputs, recorded in [dependencies.json](dependencies.json).
 
 ## Status
 
-Version 0.2.2: **48 checks, 0 failed, 0 not run; structure 29/0; 37 tests passed**.
-Public names use `github.com/criad-com`. Nix remains not proven: the single
-attempt stopped at a nested toolchain input with HTTP 404.
+Version 0.2.3: **48 checks, 0 failed, 0 not run; structure 29/0; 37 tests passed**.
+All eight family inputs use public release tags, with checked source revisions.
+The example was republished; its crate and nine USD layers retain all
+2,806,460 bytes. Nix remains not proven: the single offline attempt rejected a
+shallow local override before evaluation. Native checks used bridge v0.1.4
+with schema/validators v0.1.4; the selected usdSolid v0.1.5 native build is unproven.
 The [acceptance report](docs/acceptance.md) records checks,
 measurements and deviations. Exact common volume and clearance are measured;
 exact penetration depth, BCF export and whole-facility performance remain

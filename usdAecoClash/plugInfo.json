@@ -34,7 +34,7 @@
                         "usdAeco": ">=0.9.2,<1.0"
                     }, 
                     "tier": "kind", 
-                    "version": "0.2.2"
+                    "version": "0.2.3"
                 }
             }, 
             "LibraryPath": "", 

@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import sys
 from .runtime import ROOT, configure
+from .paths import scope_layer, study_root
 
 
 def export_bodies(stage, elements, out):
@@ -37,4 +38,11 @@ def export_bodies(stage, elements, out):
                           identities={p.GetAttribute('aeco:id').Get() for p in elements.values()}, deflection=.0001)
     if report['failed'] or report['exact'] != len(elements):
         raise ValueError('Exact export did not produce every selected body: ' + json.dumps(report['perClass']))
+    root = study_root(stage)
+    if str(root) != '/':
+        from pxr import Sdf
+        for filename in ('exact.usda', 'twins.usda'):
+            layer = Sdf.Layer.FindOrOpen(str(out / filename))
+            scope_layer(layer, root)
+            layer.Save()
     return report

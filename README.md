@@ -73,6 +73,21 @@ The installed entry point is `aeco-clash`. Compose outputs above the source;
 replace the previous layer on recheck so disappeared pairs do not persist.
 `--method` overrides the driver for this run without editing the input.
 
+Set `AECO_STUDY_ROOT=/Studies/clash` when invoking the hook for a suite stage.
+The hook copies and scopes its input layers, writes tests/results beneath
+`<root>/Clash`, and places exact and twin materials together at
+`<root>/ExactMaterials`. Cameras use `/Renders/clash/<camera>`; `/Studies`
+is a plain Scope. The project and its catalog retain their existing paths.
+The default `/` preserves the committed standalone example, including its
+historical camera layout.
+
+Saved stages carry their root in metadata and test paths. Consumers discover
+it even after the environment changes: omit `--test` for a single-test stage,
+use `--test Pinned` for a unique name, or supply the actual absolute path.
+`generate_inputs.py --out <directory>` also honors the study root.
+See the [integration notes](examples/datacentre/README.md) for full-delivery
+manifests and retained exact layers.
+
 Flake URLs use public repository names. Supply deployment mirrors through an
 external registry or `--override-input`, following the
 [toolchain instructions](https://github.com/criad-com/usdaeco-toolchain/blob/v0.3.10/docs/repo-conventions.md),
@@ -104,12 +119,12 @@ inputs, recorded in [dependencies.json](dependencies.json).
 
 ## Status
 
-Version 0.2.3: **48 checks, 0 failed, 0 not run; structure 29/0; 37 tests passed**.
-All eight family inputs use public release tags, with checked source revisions.
-The example was republished; its crate and nine USD layers retain all
-2,806,460 bytes. Nix remains not proven: the single offline attempt rejected a
-shallow local override before evaluation. Native checks used bridge v0.1.4
-with schema/validators v0.1.4; the selected usdSolid v0.1.5 native build is unproven.
+Version 0.2.4: **48 checks, 0 failed, 0 not run; structure 29/0; 47 tests passed**.
+Scoped hooks pass on the pinned clash fixture and full v0.5.2 delivery;
+committed example assets remain byte-identical. Nix remains not proven: the
+single attempt stopped at the IFC v0.2.2 public tag with HTTP 404.
+Native checks use bridge v0.1.4 with schema/validators v0.1.4;
+the selected usdSolid v0.1.5 native build remains unproven.
 The [acceptance report](docs/acceptance.md) records checks,
 measurements and deviations. Exact common volume and clearance are measured;
 exact penetration depth, BCF export and whole-facility performance remain

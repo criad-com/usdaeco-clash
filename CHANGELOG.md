@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.4
+
+- Add `AECO_STUDY_ROOT` (default `/`). Suite hooks put tests and both result
+  routes under `/Studies/clash/Clash`, with exact/twin materials shared at
+  `/Studies/clash/ExactMaterials` and cameras under `/Renders/clash`.
+- Rebase copies of input and exact layers, preserving relationship targets,
+  shader connections, internal prototype references and path metadata. Keep
+  the project catalog in place; author no additional root catalog.
+- Discover tests from saved stage data. The CLI accepts a unique test name,
+  an absolute path, or an omitted `--test` for a stage with one test.
+- Verify the full v0.5.2 delivery and the pinned v0.4.8 native hook with a
+  non-default root. All 47 tests pass; committed example assets retain their
+  bytes and the default example still passes all 48 family checks.
+- Deviations: BCF export remains unimplemented. The full-delivery test uses
+  retained exact layers and remeasures them natively; fresh exact production
+  remains tied to v0.4.8. One Nix attempt stopped at the IFC tag's HTTP 404;
+  no retry. See [acceptance evidence](docs/acceptance.md).
+
 ## 0.2.3
 
 - public re-pin: toolchain v0.3.10, core v0.9.5, axis v0.1.5,

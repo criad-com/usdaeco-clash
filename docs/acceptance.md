@@ -1,4 +1,48 @@
-# Acceptance evidence for v0.2.3
+# Acceptance evidence for v0.2.4
+
+The release adds configurable study roots without republishing the standalone
+example. Direct dependency pins and requirement ranges remain unchanged.
+
+| Acceptance | Measured result | Status |
+|---|---|---|
+| Release metadata | Library, distribution, Python package and generated plugin report 0.2.4 | PASS |
+| Family gate | 48 checks, 0 failed, 0 not run | PASS |
+| Structure | S01–S29: 29 rules, 0 failed | PASS |
+| Pytest | 47 passed, including 10 study-root regressions | PASS |
+| Full v0.5.2 delivery | Only the project, `/Studies` and `/Renders` at the root; `/Studies` is Scope | PASS |
+| Project catalog | Existing project catalog preserved; no root catalog authored; source layers unchanged | PASS |
+| Scoped mesh and exact results | 3 pairs per route beneath `/Studies/clash/Clash/Pinned` | PASS |
+| Fresh native hook on pinned v0.4.8 | 5 exact bodies, 0 failures; 2 deflection studies; unchanged comparison | PASS |
+| Materials | Exact bodies and twins share `/Studies/clash/ExactMaterials`; bindings and shader connections resolve | PASS |
+| Cameras | All scoped hook and retained result cameras beneath `/Renders/clash` | PASS |
+| Saved-stage CLI | Fresh process discovers the test with the setting unset; unique name also works with a conflicting setting | PASS |
+| Validators | All 4 clash rules operate on relocated records; no errors; warning sites use the new root | PASS |
+| Path metadata and prototypes | Nested path metadata, internal references and inherited bindings relocate; repeated relocation is stable | PASS |
+| Default example | Regenerated inputs, crate and 9 archived layers match byte-for-byte; all 17 committed assets (3,200,066 bytes) unchanged | PASS |
+| Nix | One attempt stopped at IFC v0.2.2 input resolution, HTTP 404 | NOT PROVEN |
+
+The full-delivery probe reads `dist/full/dc.usda` and its manifest from the
+v0.5.2 publication. It checks all three geometric witnesses and preserves the
+project catalog and the source layer contents. Retained exact/twin/result
+layers are copied, relocated and composed, then the exact engine remeasures
+hard, clearance and touching. The fresh native hook runs separately against
+the v0.4.8 clash recipe, using the same root. Neither sibling source nor
+committed example artifacts are edited.
+
+## Deviations
+
+- BCF export does not exist in v0.2.3 and remains future work. There is no
+  BCF path consumer to migrate; the USD/JSON CLIs and validators are covered.
+- Fresh exact generation remains pinned to the v0.4.8 IFC recipe. The full
+  v0.5.2 probe retains those exact opinions and runs the native measurement
+  engine against them; it does not claim fresh full-delivery IFC export.
+- Native checks use bridge v0.1.4 and schema/validators v0.1.4, as in the prior
+  release. The selected usdSolid v0.1.5 native combination remains unproven.
+- `nix flake check --offline --no-write-lock-file` was attempted once with
+  builders and substituters disabled. IFC v0.2.2 public input resolution
+  returned HTTP 404 before derivation checks; no second attempt was made.
+
+## Historical v0.2.3 evidence
 
 All eight direct family inputs use the public release tags in
 [dependencies.json](../dependencies.json), with their checked forge revisions.
@@ -39,7 +83,7 @@ implementations and remain unchanged. Upstream [datacentre 0.4.8](https://github
 retains published stage and camera bytes, while [bridge 0.1.4](https://github.com/criad-com/usdSolidOcct/blob/v0.1.4/CHANGELOG.md)
 records unchanged exported geometry after its native rebuild.
 
-## Deviations
+### Deviations
 
 - **Native package substitution.** The observed bridge is v0.1.4, with schema
   and validators v0.1.4, verified against that release's runtime receipt.

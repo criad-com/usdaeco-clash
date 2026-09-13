@@ -7,8 +7,8 @@ from pxr import Gf, Sdf, Usd, UsdGeom, Vt
 from .engine import PREFIX,FALLBACKS,attr,run_test,author_results,bodies
 from .geometry import measure
 from .cli import compare
+from .paths import camera_path, prepare_inputs, resolve_test, scope, study_root
 
-TEST = '/Clash/Pinned'
 CASES = {'pipe.clash.hard':'through-wall','pipe.clash.near':'over-tray','pipe.clash.tangent':'tangent'}
 
 
@@ -45,10 +45,14 @@ def derive(stage,out_dir):
     from .example_source import export_bodies
     import sys
     import tempfile
+    prepare_inputs(stage, out_dir)
+    test_path = resolve_test(stage, 'Pinned')
+    root = study_root(stage)
     elements=source_elements(stage)
-    source=Path(os.environ['AECO_DATACENTRE_ROOT'])/'dist/clash/dc.manifest.json'
+    source_stage = os.environ.get('AECO_DATACENTRE_STAGE')
+    source=Path(source_stage).with_name('dc.manifest.json') if source_stage else Path(os.environ['AECO_DATACENTRE_ROOT'])/'dist/clash/dc.manifest.json'
     manifest=json.loads(source.read_text())
-    rows=run_test(stage,TEST,method='mesh')
+    rows=run_test(stage,test_path,method='mesh')
     stage.GetRootLayer().subLayerPaths.insert(0,author_results(stage,rows,out_dir/'results.usda'))
     stage.SetMetadata('fallbackPrimTypes',{**stage.GetMetadata('fallbackPrimTypes'),**FALLBACKS})
     (out_dir/'mesh.json').write_text(json.dumps(rows,indent=2,sort_keys=True)+'\n')
@@ -66,7 +70,7 @@ def derive(stage,out_dir):
         stage.GetRootLayer().subLayerPaths[:0]=[str(out_dir/'exact.usda'),str(out_dir/'twins.usda')]
         fallbacks=stage.GetMetadata('fallbackPrimTypes');fallbacks['BrepArray']=Vt.TokenArray(['Xform']);stage.SetMetadata('fallbackPrimTypes',fallbacks)
         print('== stage: exact clash',flush=True)
-        exact=run_test(stage,TEST,method='exact')
+        exact=run_test(stage,test_path,method='exact')
         stage.GetRootLayer().subLayerPaths.insert(0,author_results(stage,exact,out_dir/'exact-results.usda'))
         (out_dir/'exact.json').write_text(json.dumps(exact,indent=2,sort_keys=True)+'\n')
         findings.append(dict(name='ExactExport',selected=report['selected'],exact=report['exact'],failed=report['failed']))
@@ -141,7 +145,9 @@ def derive(stage,out_dir):
                 if child.IsA(UsdGeom.Mesh) and attr(child,'aeco:derived:role')=='body':
                     UsdGeom.Imageable(wireframe.OverridePrim(child.GetPath())).CreateVisibilityAttr(
                         'inherited' if child.GetName()=='Body' else 'invisible')
-        camera=UsdGeom.Camera.Define(wireframe,'/Renders/wireframe')
+        if root != Sdf.Path.absoluteRootPath:
+            scope(wireframe.GetRootLayer(), '/Renders/clash')
+        camera=UsdGeom.Camera.Define(wireframe,camera_path('wireframe', root))
         camera.CreateProjectionAttr('orthographic')
         camera.CreateHorizontalApertureAttr(28.)
         camera.CreateVerticalApertureAttr(17.5)

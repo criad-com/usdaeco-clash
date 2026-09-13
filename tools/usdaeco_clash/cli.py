@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 from pxr import Plug, Usd
 from .comparison import compare
+from .paths import resolve_test
 
 
 def register():
@@ -22,7 +23,7 @@ def main(argv=None):
     sub = parser.add_subparsers(dest='command',required=True)
     run = sub.add_parser('run')
     run.add_argument('stage',type=Path)
-    run.add_argument('--test',required=True)
+    run.add_argument('--test',help='Absolute test path or unique name; omit when the stage has one test')
     run.add_argument('--output',type=Path,required=True)
     run.add_argument('--json',type=Path)
     run.add_argument('--method',choices=('mesh','exact'),help='Override the test method without editing its drivers')
@@ -44,9 +45,10 @@ def main(argv=None):
             raise ValueError('Output must be separate from the input layer stack')
         if args.json and (args.json.resolve() in inputs or args.json.resolve() == args.output.resolve()):
             raise ValueError('JSON output must be separate from input and USD output layers')
-        method = args.method or stage.GetPrimAtPath(args.test).GetAttribute('aeco:clash:method').Get()
+        test_path = resolve_test(stage, args.test)
+        method = args.method or stage.GetPrimAtPath(test_path).GetAttribute('aeco:clash:method').Get()
         print('== stage: '+str(method)+' clash',flush=True)
-        rows = run_test(stage,args.test,method=method)
+        rows = run_test(stage,test_path,method=method)
         author_results(stage,rows,args.output)
         if args.json:
             args.json.write_text(json.dumps(rows,indent=2,sort_keys=True,allow_nan=False)+'\n')

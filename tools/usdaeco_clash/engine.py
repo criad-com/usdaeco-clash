@@ -7,6 +7,7 @@ import uuid
 import numpy as np
 from pxr import Gf, Sdf, Usd, UsdGeom, Vt
 from .geometry import Body, aabb_distance, measure, measured_deflection
+from .paths import ROOT_KEY, camera_path, scope, study_root
 
 PREFIX = 'aeco:clash:'
 FALLBACKS = {'AecoClashTest': Vt.TokenArray(['Scope']), 'AecoClashResult': Vt.TokenArray(['Scope'])}
@@ -205,10 +206,18 @@ def author_results(stage, results, output):
     UsdGeom.SetStageUpAxis(overlay,'Z')
     overlay.SetMetadata('fallbackPrimTypes',FALLBACKS)
     overlay.GetRootLayer().customLayerData = {'aeco:clash:layer':'derived clash results'}
+    roots = {study_root(stage, Sdf.Path(row['path']).GetParentPath()) for row in results} or {study_root(stage)}
+    for root in roots:
+        if root != Sdf.Path.absoluteRootPath:
+            scope(overlay.GetRootLayer(), root)
+            scope(overlay.GetRootLayer(), '/Renders/clash')
+    if len(roots) == 1 and Sdf.Path.absoluteRootPath not in roots:
+        overlay.GetRootLayer().customLayerData = {**overlay.GetRootLayer().customLayerData, ROOT_KEY: str(next(iter(roots)))}
     types = {'kind':Sdf.ValueTypeNames.Token,'distance':Sdf.ValueTypeNames.Double,
              'point':Sdf.ValueTypeNames.Point3d,'uncertainty':Sdf.ValueTypeNames.Double,'evidence':Sdf.ValueTypeNames.String,
              'volume':Sdf.ValueTypeNames.Double}
     for row in results:
+        root = study_root(stage, Sdf.Path(row['path']).GetParentPath())
         overlay.OverridePrim(Sdf.Path(row['path']).GetParentPath())
         prim = overlay.DefinePrim(row['path'],'AecoClashResult')
         prim.CreateRelationship(PREFIX+'elements',custom=False).SetTargets(row['elements'])
@@ -219,6 +228,7 @@ def author_results(stage, results, output):
             if key == 'point':
                 value = Gf.Vec3d(*value)
             prim.CreateAttribute(PREFIX+key,value_type,custom=False).Set(value)
-        frame_camera(overlay,row['path']+'/Camera',row['point'],.5)
+        camera = camera_path(Sdf.Path(row['path']).name, root) if root != Sdf.Path.absoluteRootPath else row['path']+'/Camera'
+        frame_camera(overlay,camera,row['point'],.5)
     overlay.GetRootLayer().Save()
     return str(path.resolve())

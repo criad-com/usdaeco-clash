@@ -175,6 +175,6 @@ outside this release. No whole-facility performance claim is made.
 
 ## 9 Status
 
-Version 0.2.3 delivers both engines, four validators, the measured comparison,
+Version 0.2.4 delivers both engines, four validators, the measured comparison,
 two exact tessellation studies, Route S wireframe and portable results.
 The [acceptance report](acceptance.md) records the gate and remaining limits.

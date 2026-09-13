@@ -57,7 +57,8 @@ def main():
     hard=[e for e in errors if e.GetType()==UsdValidation.ValidationErrorType.Error]
     report.check('published stage core and clash validation',not hard,f'{len(hard)} errors, {len(errors)-len(hard)} warnings; all 12 rules loaded')
     from usdaeco_clash.engine import run_test
-    mesh=run_test(stage,'/Clash/Pinned',method='mesh')
+    from usdaeco_clash.paths import resolve_test
+    mesh=run_test(stage,resolve_test(stage,'Pinned'),method='mesh')
     report.check('mesh results',len(mesh)==3 and sorted(r['kind'] for r in mesh)==['clearance','hard','hard'],'3 mesh findings, 0 unclassified')
     if absent:
         report.not_run('exact distance, common volume and 5 mm decision',absent)

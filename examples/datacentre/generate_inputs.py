@@ -1,25 +1,35 @@
 #!/usr/bin/env python3
 """Regenerate this repository's selections and cameras from the pinned stage."""
 import os
+import argparse
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools'))
 from pxr import Gf,Sdf,Usd,UsdGeom
 from usdaeco_clash.cli import register
-from usdaeco_clash.example import source_elements,CASES,TEST
+from usdaeco_clash.example import source_elements,CASES
 from usdaeco_clash.engine import FALLBACKS
+from usdaeco_clash.paths import ROOT_KEY, camera_path, scope, study_root
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--out', type=Path, default=Path(__file__).parent/'inputs')
+    args = parser.parse_args()
     register()
-    stage=Usd.Stage.Open(str(Path(os.environ['AECO_DATACENTRE_ROOT'])/'dist/clash/dc.usda'))
+    source = os.environ.get('AECO_DATACENTRE_STAGE') or str(Path(os.environ['AECO_DATACENTRE_ROOT'])/'dist/clash/dc.usda')
+    stage=Usd.Stage.Open(source)
     elements=source_elements(stage)
-    inputs=Path(__file__).parent/'inputs'
+    inputs=args.out
+    inputs.mkdir(parents=True, exist_ok=True)
+    root=study_root()
     test_stage=Usd.Stage.CreateNew(str(inputs/'tests.usda'))
     test_stage.SetMetadata('fallbackPrimTypes',FALLBACKS)
-    UsdGeom.Scope.Define(test_stage,'/Clash')
-    test=test_stage.DefinePrim(TEST,'AecoClashTest')
+    scope(test_stage.GetRootLayer(), root.AppendChild('Clash'))
+    if root != Sdf.Path.absoluteRootPath:
+        test_stage.GetRootLayer().customLayerData = {ROOT_KEY: str(root)}
+    test=test_stage.DefinePrim(root.AppendPath('Clash/Pinned'),'AecoClashTest')
     test.CreateAttribute('aeco:id',Sdf.ValueTypeNames.String).Set('d5d2aa31-76bb-5bd8-89c4-fd002370d2e4')
     test.CreateAttribute('aeco:clash:method',Sdf.ValueTypeNames.Token).Set('mesh')
     test.CreateAttribute('aeco:clash:tolerance',Sdf.ValueTypeNames.Double).Set(.001)
@@ -31,11 +41,13 @@ def main():
     test_stage.GetRootLayer().Save()
     cameras=Usd.Stage.CreateNew(str(inputs/'cameras.usda'))
     UsdGeom.Scope.Define(cameras,'/Renders')
+    if root != Sdf.Path.absoluteRootPath:
+        scope(cameras.GetRootLayer(), '/Renders/clash')
     views=[('overview',(24,-2.4,14),(24,-2.4,6.8),6.2),
            ('fine',(36,-5,6.86),(36,-1.5,6.86),.26),
            ('coarse',(42,-5,6.86),(42,-1.5,6.86),.26)]
     for name,eye,target,width in views:
-        cam=UsdGeom.Camera.Define(cameras,'/Renders/'+name)
+        cam=UsdGeom.Camera.Define(cameras,camera_path(name, root))
         cam.CreateProjectionAttr('orthographic')
         cam.CreateHorizontalApertureAttr(width*10)
         cam.CreateVerticalApertureAttr(width*10*800/1280)
